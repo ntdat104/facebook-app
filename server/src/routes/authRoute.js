@@ -14,4 +14,14 @@ router.get('/login', authController.handleLogin);
 // @access Public
 router.post('/register', authController.handleRegister);
 
+// @route GET api/auth/token
+// @desc Generate token
+// @access Private
+router.post('/token', authController.handleGetNewToken);
+
+// @route DELETE api/auth/logout
+// @desc Log out user
+// @access Private
+router.delete('/logout', authController.handleLogout);
+
 module.exports = router;
