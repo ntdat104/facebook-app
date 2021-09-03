@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 // models
 const User = require('../models/userModel');
 
+// constants
+const { ACCESS_TOKEN_LIFE, ACCESS_TOKEN_SECRET } = require('../constants/auth');
+
 const authController = {};
 
 let refreshTokens = [];
@@ -38,10 +41,7 @@ authController.handleRegister = async (req, res, next) => {
     await newUser.save();
 
     // Return token
-    const accessToken = jwt.sign(
-      { userId: newUser._id },
-      process.env.ACCESS_TOKEN_SECRET
-    );
+    const accessToken = jwt.sign({ userId: newUser._id }, ACCESS_TOKEN_SECRET);
 
     // Default status is 200
     return res.json({
@@ -84,11 +84,9 @@ authController.handleLogin = async (req, res, next) => {
     }
 
     // Return token
-    const accessToken = jwt.sign(
-      { userId: user._id },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '50s' }
-    );
+    const accessToken = jwt.sign({ userId: user._id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_LIFE,
+    });
 
     const refreshToken = jwt.sign(
       { userId: user._id },
@@ -126,11 +124,9 @@ authController.handleGetNewToken = (req, res) => {
       return res.status(403).json({ message: 'Invalid token' });
     }
 
-    const accessToken = jwt.sign(
-      { userId: user._id },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '50s' }
-    );
+    const accessToken = jwt.sign({ userId: user._id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_LIFE,
+    });
 
     res.json({ accessToken });
   });
