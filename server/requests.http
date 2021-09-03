@@ -1,0 +1,51 @@
+### Register
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "igdev",
+  "password": "igdev"
+}
+
+
+### Login
+GET http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "igdev",
+  "password": "igdev"
+}
+
+
+### Get posts
+GET http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2NTgzNzR9.z5yX4odEe7LvRcF7MvFoQdqppU86yIVKMDs2K83s2cY
+
+
+### Create new post
+POST http://localhost:5000/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2NTkwMzN9.ZpmEwwnuNiNhSf3G_hDZltAxLGyvLpyAv6H8vHikvCI
+
+{
+  "content": "69",
+  "likeCount": 100
+}
+
+
+### Update post
+PUT http://localhost:5000/api/posts/6131a63f7deee780626ebfe7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxOWM0ZmFlMzk4NzExY2Y1NTE1MzciLCJpYXQiOjE2MzA2NTU4NDJ9.sOBmvlyN_PpmPMajzfNrSlmX1fi7WCAFbCK05opBHnY
+
+{
+  "content": "New post!!",
+  "likeCount": "1234",
+  "attachments": "random..."
+}
+
+
+### Delete post
+DELETE http://localhost:5000/api/posts/6131e1e6dcbd1b38cb69d8c1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2NTkxMDB9.Mu43sPMFgxMlqmknwcASdTqU8lYLTAZm8PI9iooWKCk
