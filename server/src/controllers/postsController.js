@@ -16,8 +16,7 @@ postsController.handleGetPosts = async (req, res) => {
 
 postsController.handleCreatePost = async (req, res) => {
   const { content, likeCount, attachments } = req.body;
-  console.log(req.userId);
-  // Init validation
+
   if (!content) {
     return res
       .status(404)
@@ -48,8 +47,7 @@ postsController.handleCreatePost = async (req, res) => {
 
 postsController.handleUpdatePost = async (req, res) => {
   const { content, likeCount, attachments } = req.body;
-  console.log(req.body);
-  // Init validation
+
   if (!content) {
     return res
       .status(404)
@@ -87,7 +85,6 @@ postsController.handleUpdatePost = async (req, res) => {
 postsController.handleDeletePost = async (req, res) => {
   try {
     const deleteCondition = { _id: req.params.id, user: req.userId };
-
     const deletedPost = await Post.findOneAndDelete(deleteCondition);
 
     // User are not authorized to update post or post not found

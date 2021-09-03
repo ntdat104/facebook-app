@@ -14,7 +14,6 @@ let refreshTokens = [];
 authController.handleRegister = async (req, res, next) => {
   const { username, password } = req.body;
 
-  // Init validation
   if (!username || !password) {
     return res
       .status(400)
@@ -58,7 +57,6 @@ authController.handleRegister = async (req, res, next) => {
 authController.handleLogin = async (req, res, next) => {
   const { username, password } = req.body;
 
-  // Init validation
   if (!username || !password) {
     return res
       .status(400)
@@ -108,6 +106,15 @@ authController.handleLogin = async (req, res, next) => {
   }
 };
 
+authController.handleLogout = (req, res) => {
+  console.log(req.body);
+  refreshTokens = refreshTokens.filter(
+    (token) => token !== req.body.refreshToken
+  );
+
+  res.status(204).json({ success: true, message: 'User is logged out' });
+};
+
 authController.handleGetNewToken = (req, res) => {
   const { refreshToken } = req.body;
 
@@ -116,7 +123,7 @@ authController.handleGetNewToken = (req, res) => {
   }
 
   if (!refreshTokens.includes(refreshToken)) {
-    return res.status(403).json({ message: 'Token does not exist' });
+    return res.status(403).json({ message: 'Refresh token does not exist' });
   }
 
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
@@ -130,15 +137,6 @@ authController.handleGetNewToken = (req, res) => {
 
     res.json({ accessToken });
   });
-};
-
-authController.handleLogout = (req, res) => {
-  console.log(req.body);
-  refreshTokens = refreshTokens.filter(
-    (token) => token !== req.body.refreshToken
-  );
-
-  res.status(204).json({ success: true, message: 'User is logged out' });
 };
 
 module.exports = authController;
