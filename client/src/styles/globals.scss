@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+@import './variables';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13.5px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-color: transparent;
+
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-track {
+    margin: 3px 0;
+  }
+
+  .i-scrollbar:hover > ::-webkit-scrollbar-thumb {
+    background-color: #bcc0c4;
+  }
+
+  .i-scrollbar.dark:hover ::-webkit-scrollbar-thumb {
+    background-color: #5e5e5f;
+  }
+}
+
+@layer utilities {
+  .i-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .i-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+}
