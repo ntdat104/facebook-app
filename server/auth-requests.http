@@ -1,0 +1,36 @@
+### Register
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "igdev",
+  "password": "igdev"
+}
+
+
+### Login
+GET http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "igdev",
+  "password": "igdev"
+}
+
+
+### Louout
+DELETE http://localhost:5000/api/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2Nzk3NjJ9.uH-9d4dYiKu7zCtWQynWcwmUHWh3pQKWLtl3Di4rZOQ"
+}
+
+
+### Get new token
+POST http://localhost:5000/api/auth/token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2Nzk3NjJ9.uH-9d4dYiKu7zCtWQynWcwmUHWh3pQKWLtl3Di4rZOQ"
+}

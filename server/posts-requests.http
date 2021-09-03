@@ -1,26 +1,6 @@
-### Register
-POST http://localhost:5000/api/auth/register
-Content-Type: application/json
-
-{
-  "username": "igdev",
-  "password": "igdev"
-}
-
-
-### Login
-GET http://localhost:5000/api/auth/login
-Content-Type: application/json
-
-{
-  "username": "igdev",
-  "password": "igdev"
-}
-
-
 ### Get posts
 GET http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2NTgzNzR9.z5yX4odEe7LvRcF7MvFoQdqppU86yIVKMDs2K83s2cY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2Nzk1NDMsImV4cCI6MTYzMDY3OTU5M30.kK0dSdEniOKIAit5FE7Zw8F4K7sBnIq5r4jUayViyPM
 
 
 ### Create new post
