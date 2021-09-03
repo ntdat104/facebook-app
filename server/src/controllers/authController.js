@@ -6,6 +6,8 @@ const User = require('../models/userModel');
 
 const authController = {};
 
+let refreshTokens = [];
+
 authController.handleRegister = async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -84,19 +86,63 @@ authController.handleLogin = async (req, res, next) => {
     // Return token
     const accessToken = jwt.sign(
       { userId: user._id },
-      process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '50s' }
     );
+
+    const refreshToken = jwt.sign(
+      { userId: user._id },
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    refreshTokens.push(refreshToken);
 
     // Default status is 200
     return res.json({
       success: true,
       message: 'User has successfully logged in',
       accessToken,
+      refreshToken,
     });
   } catch (error) {
     console.log('error', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
+};
+
+authController.handleGetNewToken = (req, res) => {
+  const { refreshToken } = req.body;
+
+  if (refreshToken === null) {
+    return res.status(401).json({ message: 'Token not provided' });
+  }
+
+  if (!refreshTokens.includes(refreshToken)) {
+    return res.status(403).json({ message: 'Token does not exist' });
+  }
+
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
+    if (error) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+
+    const accessToken = jwt.sign(
+      { userId: user._id },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '50s' }
+    );
+
+    res.json({ accessToken });
+  });
+};
+
+authController.handleLogout = (req, res) => {
+  console.log(req.body);
+  refreshTokens = refreshTokens.filter(
+    (token) => token !== req.body.refreshToken
+  );
+
+  res.status(204).json({ success: true, message: 'User is logged out' });
 };
 
 module.exports = authController;
