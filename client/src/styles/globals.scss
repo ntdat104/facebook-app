@@ -19,13 +19,17 @@
   ::-webkit-scrollbar-thumb {
     border-radius: 9999px;
     border: 3px solid transparent;
-    background-color: transparent;
+    background-color: #bcc0c4;
 
     background-clip: content-box;
   }
 
   ::-webkit-scrollbar-track {
     margin: 3px 0;
+  }
+
+  .i-scrollbar > ::-webkit-scrollbar-thumb {
+    background-color: transparent;
   }
 
   .i-scrollbar:hover > ::-webkit-scrollbar-thumb {
