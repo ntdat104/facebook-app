@@ -1,18 +1,10 @@
-const CONTENT_LEFT = '360px';
-const CONTENT_MIDDLE = '680px';
-const CONTENT_RIGHT = '360px';
-const HEADER_HEIGHT = '56px';
-const SIDEBAR_HEIGHT = 'calc(100vh - 56px)';
-const WIDGET_HEIGHT = 'calc(100vh - 56px)';
-const POST_HEIGHT = '472px';
-
 module.exports = {
   mode: 'jit',
   purge: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     extend: {
       container: {
@@ -39,6 +31,7 @@ module.exports = {
         },
         green: {
           DEFAULT: '#45BD62',
+          dark: '#42B72A',
         },
         yellow: {
           DEFAULT: '#F7B928',
@@ -82,6 +75,7 @@ module.exports = {
         2: '2',
       },
       boxShadow: {
+        form: '0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%)',
         'emoji-light': '1px 0 1px 1px #fff',
         'emoji-dark': '0.5px 0 1px 1px #3A3B3C',
       },
@@ -93,6 +87,7 @@ module.exports = {
       lg: '18px',
       xl: '20px',
       '2xl': '24px',
+      '2.1xl': '25px',
       '3xl': '30px',
       '4xl': '36px',
       '5xl': '48px',
@@ -137,16 +132,20 @@ module.exports = {
       60: '240px',
       64: '256px',
       72: '288px',
+      75: '300px',
       80: '320px',
       90: '360px',
       96: '384px',
-      'content-left': CONTENT_LEFT,
-      'content-middle': CONTENT_MIDDLE,
-      'content-right': CONTENT_RIGHT,
-      header: HEADER_HEIGHT,
-      sidebar: SIDEBAR_HEIGHT,
-      widget: WIDGET_HEIGHT,
-      post: POST_HEIGHT,
+      99: '396px',
+      'content-left': '360px',
+      'content-login': '980px',
+      'content-register': '980px',
+      'content-middle': '680px',
+      'content-right': '360px',
+      header: '56px',
+      sidebar: 'calc(100vh - 56px)',
+      widget: 'calc(100vh - 56px)',
+      post: '472px',
     },
   },
   variants: {
