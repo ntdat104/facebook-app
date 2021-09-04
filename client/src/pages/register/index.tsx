@@ -12,7 +12,7 @@ function Login() {
     <>
       <div className={clsx('pt-32 pb-48', 'bg-light-body')}>
         <div className={clsx('flex m-auto w-content-login')}>
-          <div className={clsx('pr-20 mt-12')}>
+          <div className={clsx('pr-20 mt-20')}>
             <div className={clsx('w-75 -ml-7 -mb-2')}>
               <NextImage src={logo.src} alt='Logo' />
             </div>

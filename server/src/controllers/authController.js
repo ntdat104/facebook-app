@@ -12,7 +12,7 @@ const authController = {};
 let refreshTokens = [];
 
 authController.handleRegister = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, avatar } = req.body;
 
   if (!username || !password) {
     return res
@@ -34,6 +34,7 @@ authController.handleRegister = async (req, res, next) => {
     const newUser = new User({
       username,
       password: hashedPassword,
+      avatar,
     });
 
     // Save to db
