@@ -3,3 +3,8 @@ export interface IRegisterInfo {
   password: string;
   avatar: string;
 }
+
+export interface ILoginInfo {
+  username: string;
+  password: string;
+}
