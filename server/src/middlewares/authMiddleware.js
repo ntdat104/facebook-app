@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// constants
 const { ACCESS_TOKEN_SECRET } = require('../constants/auth');
 
 const verifyToken = (req, res, next) => {
