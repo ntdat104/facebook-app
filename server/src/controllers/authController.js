@@ -71,7 +71,7 @@ authController.handleLogin = async (req, res, next) => {
     if (!user) {
       return res
         .status(400)
-        .json({ success: false, message: 'Incorrect username' });
+        .json({ success: false, message: 'Incorrect username or password' });
     }
 
     const passwordValid = await argon2.verify(user.password, password);
@@ -79,7 +79,7 @@ authController.handleLogin = async (req, res, next) => {
     if (!passwordValid) {
       return res
         .status(400)
-        .json({ success: false, message: 'Incorrect password' });
+        .json({ success: false, message: 'Incorrect username or password' });
     }
 
     // Return token

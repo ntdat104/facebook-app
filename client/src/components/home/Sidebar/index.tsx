@@ -7,7 +7,7 @@ import { Avatar } from '@material-ui/core';
 // material ui icons
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
-import NextImage from '../NextImage';
+import NextImage from '@/components/common/NextImage';
 
 import styles from '@/styles/utilities.module.scss';
 

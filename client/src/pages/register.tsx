@@ -1,9 +1,11 @@
+import Link from 'next/link';
+
 // clsx
 import clsx from 'clsx';
 
-import NextImage from '@/components/NextImage';
-import Footer from '@/components/Footer';
-import RegisterForm from './RegisterForm';
+import NextImage from '@/components/common/NextImage';
+import Footer from '@/components/common/Footer';
+import RegisterForm from '../components/register/RegisterForm';
 
 import logo from '@/assets/svgs/facebook-logo.svg';
 
@@ -37,15 +39,17 @@ function Login() {
             <span className={clsx('text-primary', 'cursor-pointer')}>
               Already have an account?
             </span>
-            <button
-              className={clsx(
-                'h-12 px-10 mb-2 mt-3 rounded-lg text-base font-bold',
-                'text-white bg-green-dark',
-                'transition ease-out',
-                'hover:brightness-95'
-              )}>
-              Login
-            </button>
+            <Link href='/login' passHref>
+              <button
+                className={clsx(
+                  'h-12 px-10 mb-2 mt-3 rounded-lg text-base font-bold outline-none',
+                  'text-white bg-green-dark',
+                  'transition ease-out',
+                  'hover:brightness-95'
+                )}>
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>
