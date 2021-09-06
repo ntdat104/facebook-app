@@ -1,4 +1,4 @@
-import NextImage from '../NextImage';
+import NextImage from '@/components/common/NextImage';
 
 // clsx
 import clsx from 'clsx';

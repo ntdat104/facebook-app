@@ -1,11 +1,11 @@
 // clsx
 import clsx from 'clsx';
 
-import Header from '@/components/Header';
-import Sidebar from '@/components/Sidebar';
+import Header from '@/components/common/Header';
 import MainLayout from '@/layout/MainLayout';
-import Content from '@/components/Content';
-import Widget from '@/components/Widget';
+import Sidebar from '@/components/home/Sidebar';
+import Content from '@/components/home/Content';
+import Widget from '@/components/home/Widget';
 
 // types
 import type { NextPage } from 'next';
