@@ -8,26 +8,26 @@ const router = express.Router();
 // @route GET api/auth
 // @desc Get current user
 // @access Public
-router.get('/', verifyToken, authController.handleGetUser);
+router.get('/', verifyToken, authController.getUser);
 
 // @route POST api/auth/login
 // @desc Check if user is logged in
 // @access Public
-router.post('/login', authController.handleLogin);
+router.post('/login', authController.login);
 
-// @route GET api/auth/register
+// @route POST api/auth/register
 // @desc Register user
 // @access Public
-router.post('/register', authController.handleRegister);
+router.post('/register', authController.register);
 
 // @route DELETE api/auth/logout
 // @desc Log out user
 // @access Public
-router.delete('/logout', authController.handleLogout);
+router.delete('/logout', authController.logout);
 
-// @route GET api/auth/token
+// @route POST api/auth/token
 // @desc Generate new token
 // @access Public
-router.post('/token', authController.handleGetNewToken);
+router.post('/token', authController.getNewToken);
 
 module.exports = router;

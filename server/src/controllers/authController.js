@@ -11,7 +11,7 @@ const authController = {};
 
 let refreshTokens = [];
 
-authController.handleGetUser = async (req, res) => {
+authController.getUser = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
 
@@ -28,7 +28,7 @@ authController.handleGetUser = async (req, res) => {
   }
 };
 
-authController.handleRegister = async (req, res) => {
+authController.register = async (req, res) => {
   const { username, password, avatar } = req.body;
 
   if (!username || !password) {
@@ -73,7 +73,7 @@ authController.handleRegister = async (req, res) => {
   }
 };
 
-authController.handleLogin = async (req, res) => {
+authController.login = async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -126,7 +126,7 @@ authController.handleLogin = async (req, res) => {
   }
 };
 
-authController.handleLogout = (req, res) => {
+authController.logout = (req, res) => {
   console.log(req.body);
   refreshTokens = refreshTokens.filter(
     (token) => token !== req.body.refreshToken
@@ -135,7 +135,7 @@ authController.handleLogout = (req, res) => {
   res.status(204).json({ success: true, message: 'User is logged out' });
 };
 
-authController.handleGetNewToken = (req, res) => {
+authController.getNewToken = (req, res) => {
   const { refreshToken } = req.body;
 
   if (refreshToken === null) {

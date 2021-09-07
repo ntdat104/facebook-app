@@ -1,3 +1,8 @@
+### Default
+GET http://localhost:5000/api/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM3MGMxNDY4MWQwNjQ3NDJkNzc4MjIiLCJpYXQiOjE2MzEwMDYxMzIsImV4cCI6MTYzMTAwNjE2Mn0.x5V0DBSstrYNE9Zru3wGAagew9Ajjvl-1tP4uSde72w
+
+
 ### Register
 POST http://localhost:5000/api/auth/register
 Content-Type: application/json
@@ -14,7 +19,7 @@ Content-Type: application/json
 
 {
   "username": "igdev",
-  "password": "igdev"
+  "password": "1"
 }
 
 
