@@ -11,7 +11,24 @@ const authController = {};
 
 let refreshTokens = [];
 
-authController.handleRegister = async (req, res, next) => {
+authController.handleGetUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('-password');
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'User not found' });
+    }
+
+    res.json({ success: true, user });
+  } catch (error) {
+    console.log('error', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+authController.handleRegister = async (req, res) => {
   const { username, password, avatar } = req.body;
 
   if (!username || !password) {
@@ -47,6 +64,7 @@ authController.handleRegister = async (req, res, next) => {
     return res.json({
       success: true,
       message: 'User has been created successfully',
+      username,
       accessToken,
     });
   } catch (error) {
@@ -55,7 +73,7 @@ authController.handleRegister = async (req, res, next) => {
   }
 };
 
-authController.handleLogin = async (req, res, next) => {
+authController.handleLogin = async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -98,6 +116,7 @@ authController.handleLogin = async (req, res, next) => {
     return res.json({
       success: true,
       message: 'User has successfully logged in',
+      username,
       accessToken,
       refreshToken,
     });
