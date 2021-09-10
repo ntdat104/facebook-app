@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-// constants
 const { ACCESS_TOKEN_SECRET } = require('../constants/auth');
 
 const verifyToken = (req, res, next) => {
@@ -13,16 +12,16 @@ const verifyToken = (req, res, next) => {
       .json({ success: false, message: 'Access token not found' });
   }
 
-  try {
-    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+  jwt.verify(token, ACCESS_TOKEN_SECRET, (error, user) => {
+    if (error) {
+      return res.status(403).json({ success: false, message: 'Invalid token' });
+    }
 
-    // Attach userId to request
-    req.userId = decoded.userId;
+    // Attach userId to request after decoded user param
+    req.userId = user.userId;
+
     next();
-  } catch (error) {
-    console.log('error', error);
-    res.status(403).json({ success: false, message: 'Invalid token' });
-  }
+  });
 };
 
 module.exports = verifyToken;

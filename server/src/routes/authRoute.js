@@ -5,11 +5,6 @@ const verifyToken = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-// @route GET api/auth
-// @desc Get current user
-// @access Public
-router.get('/', verifyToken, authController.getUser);
-
 // @route POST api/auth/login
 // @desc Check if user is logged in
 // @access Public
@@ -25,9 +20,14 @@ router.post('/register', authController.register);
 // @access Public
 router.delete('/logout', authController.logout);
 
-// @route POST api/auth/token
-// @desc Generate new token
+// @route GET api/auth
+// @desc Get current user
 // @access Public
-router.post('/token', authController.getNewToken);
+router.get('/user', verifyToken, authController.getCurrentUser);
+
+// @route POST api/auth/token
+// @desc Generate new access token
+// @access Public
+router.post('/token', authController.getNewAccessToken);
 
 module.exports = router;

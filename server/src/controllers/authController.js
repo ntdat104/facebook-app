@@ -5,13 +5,17 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 // constants
-const { ACCESS_TOKEN_LIFE, ACCESS_TOKEN_SECRET } = require('../constants/auth');
+const {
+  ACCESS_TOKEN_LIFE,
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+} = require('../constants/auth');
 
 const authController = {};
 
 let refreshTokens = [];
 
-authController.getUser = async (req, res) => {
+authController.getCurrentUser = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
 
@@ -38,33 +42,38 @@ authController.register = async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ username });
+    const existingUser = await User.findOne({ username });
 
     // Check for user exists
-    if (user) {
+    if (existingUser) {
       return res
         .status(400)
         .json({ success: false, message: 'Username is already taken' });
     }
 
     const hashedPassword = await argon2.hash(password);
-    const newUser = new User({
+    const user = new User({
       username,
       password: hashedPassword,
       avatar,
     });
 
     // Save to db
-    await newUser.save();
+    await user.save();
 
     // Return token
-    const accessToken = jwt.sign({ userId: newUser._id }, ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign({ userId: user._id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_LIFE,
+    });
+
+    const refreshToken = jwt.sign({ userId: user._id }, REFRESH_TOKEN_SECRET);
 
     // Default status is 200
     return res.json({
       success: true,
       message: 'User has been created successfully',
       username,
+      refreshToken,
       accessToken,
     });
   } catch (error) {
@@ -92,9 +101,9 @@ authController.login = async (req, res) => {
         .json({ success: false, message: 'Incorrect username or password' });
     }
 
-    const passwordValid = await argon2.verify(user.password, password);
+    const isPasswordCorrect = await argon2.verify(user.password, password);
 
-    if (!passwordValid) {
+    if (!isPasswordCorrect) {
       return res
         .status(400)
         .json({ success: false, message: 'Incorrect username or password' });
@@ -105,12 +114,7 @@ authController.login = async (req, res) => {
       expiresIn: ACCESS_TOKEN_LIFE,
     });
 
-    const refreshToken = jwt.sign(
-      { userId: user._id },
-      process.env.REFRESH_TOKEN_SECRET
-    );
-
-    refreshTokens.push(refreshToken);
+    const refreshToken = jwt.sign({ userId: user._id }, REFRESH_TOKEN_SECRET);
 
     // Default status is 200
     return res.json({
@@ -127,7 +131,6 @@ authController.login = async (req, res) => {
 };
 
 authController.logout = (req, res) => {
-  console.log(req.body);
   refreshTokens = refreshTokens.filter(
     (token) => token !== req.body.refreshToken
   );
@@ -135,27 +138,24 @@ authController.logout = (req, res) => {
   res.status(204).json({ success: true, message: 'User is logged out' });
 };
 
-authController.getNewToken = (req, res) => {
+authController.getNewAccessToken = (req, res) => {
   const { refreshToken } = req.body;
 
-  if (refreshToken === null) {
-    return res.status(401).json({ message: 'Token not provided' });
+  if (!refreshToken) {
+    return res.status(401).json({ message: 'Refresh token not provided' });
   }
 
-  if (!refreshTokens.includes(refreshToken)) {
-    return res.status(403).json({ message: 'Refresh token does not exist' });
-  }
-
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
+  jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (error, user) => {
     if (error) {
-      return res.status(403).json({ message: 'Invalid token' });
+      return res.status(403).json({ message: 'Invalid refresh token' });
     }
 
-    const accessToken = jwt.sign({ userId: user._id }, ACCESS_TOKEN_SECRET, {
+    // Return token after decoded user param
+    const accessToken = jwt.sign({ userId: user.userId }, ACCESS_TOKEN_SECRET, {
       expiresIn: ACCESS_TOKEN_LIFE,
     });
 
-    res.json({ accessToken });
+    res.json({ success: true, accessToken });
   });
 };
 
