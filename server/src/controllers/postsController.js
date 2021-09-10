@@ -3,7 +3,7 @@ const Post = require('../models/postModel');
 
 const postsController = {};
 
-postsController.handleGetPosts = async (req, res) => {
+postsController.getPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate('user', ['username']);
 
@@ -14,7 +14,7 @@ postsController.handleGetPosts = async (req, res) => {
   }
 };
 
-postsController.handleCreatePost = async (req, res) => {
+postsController.createPost = async (req, res) => {
   const { content, likeCount, attachments } = req.body;
 
   if (!content) {
@@ -45,7 +45,7 @@ postsController.handleCreatePost = async (req, res) => {
   }
 };
 
-postsController.handleUpdatePost = async (req, res) => {
+postsController.updatePost = async (req, res) => {
   const { content, likeCount, attachments } = req.body;
 
   if (!content) {
@@ -82,7 +82,7 @@ postsController.handleUpdatePost = async (req, res) => {
   }
 };
 
-postsController.handleDeletePost = async (req, res) => {
+postsController.deletePost = async (req, res) => {
   try {
     const deleteCondition = { _id: req.params.id, user: req.userId };
     const deletedPost = await Post.findOneAndDelete(deleteCondition);
