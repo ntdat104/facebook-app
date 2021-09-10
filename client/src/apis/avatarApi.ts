@@ -14,6 +14,7 @@ export const randomAvatar = async () => {
   const avatarUrl = `${BASE_URL}/${avatarType}/${seed}.svg`;
 
   const response = await axios.get(avatarUrl);
+
   const avatar = response.config.url;
 
   return avatar;
