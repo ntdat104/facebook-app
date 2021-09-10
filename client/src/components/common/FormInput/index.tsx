@@ -23,8 +23,6 @@ function FormInput(props: IProps) {
   const { placeholder, name, serverError, register, errors, handleChange } =
     props;
 
-  console.log(errors);
-
   return (
     <div className={clsx('my-4')}>
       <input

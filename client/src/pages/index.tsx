@@ -1,16 +1,17 @@
 // clsx
 import clsx from 'clsx';
 
+// types
+import { NextPage } from 'next';
+
 import Header from '@/components/common/Header';
 import MainLayout from '@/layout/MainLayout';
 import Sidebar from '@/components/home/Sidebar';
 import Content from '@/components/home/Content';
 import Widget from '@/components/home/Widget';
 
-// types
-import type { NextPage } from 'next';
-
 import styles from '@/styles/utilities.module.scss';
+import withPrivateRoute from '@/hocs/withPrivateRoute';
 
 const Home: NextPage = () => {
   return (
@@ -50,4 +51,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withPrivateRoute(Home);

@@ -6,14 +6,15 @@ import clsx from 'clsx';
 import NextImage from '@/components/common/NextImage';
 import Footer from '@/components/common/Footer';
 import RegisterForm from '../components/register/RegisterForm';
+import withAuth from '@/hocs/withPublicRoute';
 
 import logo from '@/assets/svgs/facebook-logo.svg';
 
-function Login() {
+function Register() {
   return (
     <>
       <div className={clsx('pt-32 pb-48', 'bg-light-body')}>
-        <div className={clsx('flex m-auto w-content-login')}>
+        <div className={clsx('flex m-auto w-content-register')}>
           <div className={clsx('pr-20 mt-20')}>
             <div className={clsx('w-75 -ml-7 -mb-2')}>
               <NextImage src={logo.src} alt='Logo' />
@@ -58,4 +59,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default withAuth(Register);
