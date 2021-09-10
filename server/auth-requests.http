@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 
-### Louout
+### Logout
 DELETE http://localhost:5000/api/auth/logout
 Content-Type: application/json
 
@@ -27,10 +27,15 @@ Content-Type: application/json
 }
 
 
-### Get new token
+### Get current user
+GET http://localhost:5000/api/auth/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM5OGYyMGI4YTcwMGM3YWZmZDJlNGUiLCJpYXQiOjE2MzExNjIxNzQsImV4cCI6MTYzMTE2MjE5NH0.2SQAMF7pFlHPK43V2BwpTeeJUnmHCZVK3Cze0lZ4THc
+
+
+### Get new access token
 POST http://localhost:5000/api/auth/token
 Content-Type: application/json
 
 {
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2Nzk3NjJ9.uH-9d4dYiKu7zCtWQynWcwmUHWh3pQKWLtl3Di4rZOQ"
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM5OGYyMGI4YTcwMGM3YWZmZDJlNGUiLCJpYXQiOjE2MzExNjIxNDh9.P-EPeCiJo7MnrGtN-VFrWWZ4FfpDvp66C6IDxT6WmcU"
 }

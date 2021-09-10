@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 // clsx
 import clsx from 'clsx';
@@ -10,13 +11,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // types
 import { ILoginFormInputs } from './types';
 
-import { loginUser } from '@/apis/authApi';
 import { loginSchema } from '@/utils/formSchemas';
+import useMyDispatch from '@/hooks/useMyDispatch';
+import { fetchUserLogin } from '@/redux/slices/authSlice';
 
 import FormInput from '@/components/common/FormInput';
 
 function LoginForm() {
   const [serverError, setServerError] = useState<string>('');
+  const dispatch = useMyDispatch();
+
+  const router = useRouter();
 
   const {
     register,
@@ -30,18 +35,25 @@ function LoginForm() {
   const onHandleSubmit = async (data: ILoginFormInputs) => {
     const { username, password } = data;
 
-    const response = await loginUser({
-      username,
-      password,
-    });
+    try {
+      const response = await dispatch(
+        fetchUserLogin({
+          username,
+          password,
+        })
+      ).unwrap();
 
-    if (!response.success) {
-      setServerError(response.message);
-      return;
+      if (!response.success) {
+        setServerError(response.message);
+        return;
+      }
+
+      router.push('/');
+      reset();
+      setServerError('');
+    } catch (error: any) {
+      console.log(error.message);
     }
-
-    reset();
-    setServerError('');
   };
 
   return (

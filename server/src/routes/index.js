@@ -1,4 +1,3 @@
-// routes
 const authRoute = require('./authRoute.js');
 const postsRoute = require('./postsRoute.js');
 

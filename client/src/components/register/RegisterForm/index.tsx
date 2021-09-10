@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 // clsx
 import clsx from 'clsx';
@@ -13,9 +14,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // types
 import { IRegisterFormInputs } from './types';
 
-import { registerUser } from '@/apis/authApi';
 import { randomAvatar } from '@/apis/avatarApi';
 import { registerSchema } from '@/utils/formSchemas';
+import { fetchUserRegister } from '@/redux/slices/authSlice';
+import useMyDispatch from '@/hooks/useMyDispatch';
 
 import FormInput from '@/components/common/FormInput';
 
@@ -24,6 +26,8 @@ import styles from '@/styles/utilities.module.scss';
 function RegisterForm() {
   const [avatar, setAvatar] = useState<string>('');
   const [serverError, setServerError] = useState<string>('');
+  const dispatch = useMyDispatch();
+  const router = useRouter();
 
   const {
     register,
@@ -37,19 +41,26 @@ function RegisterForm() {
   const onHandleSubmit = async (data: IRegisterFormInputs) => {
     const { username, password } = data;
 
-    const response = await registerUser({
-      username,
-      password,
-      avatar,
-    });
+    try {
+      const response = await dispatch(
+        fetchUserRegister({
+          username,
+          password,
+          avatar,
+        })
+      ).unwrap();
 
-    if (!response.success) {
-      setServerError(response.message);
-      return;
+      if (!response.success) {
+        setServerError(response.message);
+        return;
+      }
+
+      router.push('/');
+      reset();
+      setServerError('');
+    } catch (error: any) {
+      console.log(error.message);
     }
-
-    reset();
-    setServerError('');
   };
 
   const getRandomAvatar = async () => {

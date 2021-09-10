@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import NextImage from '@/components/common/NextImage';
 import Footer from '@/components/common/Footer';
 import LoginForm from '../components/login/LoginForm';
+import withPublicRoute from '@/hocs/withPublicRoute';
 
 import logo from '@/assets/svgs/facebook-logo.svg';
 
@@ -59,4 +60,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default withPublicRoute(Login);
