@@ -7,14 +7,14 @@ import {
 } from '@/constants';
 import { getNewAccessToken } from './authApi';
 
-export const authAxios = axios.create({
+export const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_DB_API_URL,
   headers: {
     'content-type': 'application/json',
   },
 });
 
-authAxios.interceptors.request.use((config) => {
+axiosClient.interceptors.request.use((config) => {
   const token = localStorage[LOCAL_STORAGE_TOKEN_KEY];
 
   if (token) {
@@ -24,7 +24,7 @@ authAxios.interceptors.request.use((config) => {
   return config;
 });
 
-authAxios.interceptors.response.use(
+axiosClient.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -53,7 +53,7 @@ authAxios.interceptors.response.use(
           // Add new access token to header for re-request
           originalConfig.headers.Authorization = `Bearer ${accessToken}`;
 
-          return authAxios(originalConfig);
+          return axiosClient(originalConfig);
         } catch (error: any) {
           if (error.response?.data) {
             console.log('Auth error', error.response.data);
