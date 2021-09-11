@@ -17,7 +17,11 @@ const postSchema = new Schema(
       type: Number,
       default: 0,
     },
-    attachments: String,
+    attachment: String,
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );

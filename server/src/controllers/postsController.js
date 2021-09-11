@@ -1,11 +1,14 @@
 // models
 const Post = require('../models/postModel');
+const User = require('../models/userModel');
 
 const postsController = {};
 
 postsController.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate('user', ['username']);
+    const posts = await Post.find()
+      .sort({ createdAt: 'desc' })
+      .populate('user', ['username', 'avatar']);
 
     res.json({ success: true, posts });
   } catch (error) {
@@ -15,7 +18,7 @@ postsController.getPosts = async (req, res) => {
 };
 
 postsController.createPost = async (req, res) => {
-  const { content, likeCount, attachments } = req.body;
+  const { content, attachment } = req.body;
 
   if (!content) {
     return res
@@ -24,20 +27,21 @@ postsController.createPost = async (req, res) => {
   }
 
   try {
-    const newPost = new Post({
+    const user = await User.findById(req.userId).select('-password');
+
+    const post = new Post({
       content,
-      likeCount,
-      attachments,
-      user: req.userId, // ObjectId
+      attachment,
+      user,
     });
 
     // Save to db
-    await newPost.save();
+    await post.save();
 
     res.json({
       success: true,
       message: 'New post has been created successfully',
-      post: newPost,
+      post,
     });
   } catch (error) {
     console.log('error', error);

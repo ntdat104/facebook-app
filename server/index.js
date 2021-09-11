@@ -12,8 +12,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URL;
 
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ limit: '5mb' }));
 app.use(cors());
 
 // HTTP logger

@@ -1,16 +1,16 @@
 ### Get posts
 GET http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2Nzk1NDMsImV4cCI6MTYzMDY3OTU5M30.kK0dSdEniOKIAit5FE7Zw8F4K7sBnIq5r4jUayViyPM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNhMGIzMDRhMDM2YmI0ODJhNDk5YmEiLCJpYXQiOjE2MzEzMjc4MDEsImV4cCI6MTYzMTYyNzgwMX0.O7ZAOLqFuppvsQ9AYlsranjCtCsM0q2UziOviZ1iMR0
 
 
 ### Create new post
 POST http://localhost:5000/api/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2NTkwMzN9.ZpmEwwnuNiNhSf3G_hDZltAxLGyvLpyAv6H8vHikvCI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNhMGIzMDRhMDM2YmI0ODJhNDk5YmEiLCJpYXQiOjE2MzEzMjc4MDEsImV4cCI6MTYzMTYyNzgwMX0.O7ZAOLqFuppvsQ9AYlsranjCtCsM0q2UziOviZ1iMR0
 
 {
-  "content": "69",
-  "likeCount": 100
+  "content": "New post content2",
+  "likeCount": 13120
 }
 
 
