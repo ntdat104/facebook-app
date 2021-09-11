@@ -12,16 +12,18 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 
-import thumb from '@/assets/images/Stories/thumb.jpg';
+// types
+import { IPost } from '@/redux/types';
+
 import like from '@/assets/svgs/Post/like.svg';
 import sad from '@/assets/svgs/Post/sad.svg';
 import haha from '@/assets/svgs/Post/haha.svg';
 
-function Post() {
+function Post(post: IPost) {
   return (
     <div className={clsx('mt-6', 'bg-light dark:bg-dark rounded-lg shadow-md')}>
       <div className={clsx('flex items-center px-4 py-3')}>
-        <Avatar className='cursor-pointer' />
+        <Avatar className='cursor-pointer' src={post.user.avatar} />
         <div className={clsx('ml-2')}>
           <div
             className={clsx(
@@ -30,7 +32,7 @@ function Post() {
               'hover:underline',
               'cursor-pointer'
             )}>
-            Tuan David
+            {post.user.username}
           </div>
           <div>
             <span
@@ -40,7 +42,7 @@ function Post() {
                 'hover:underline',
                 'cursor-pointer'
               )}>
-              August 24 at 8:49 PM
+              {post.createdAt}
             </span>
             <GroupIcon
               className={clsx(
@@ -52,9 +54,19 @@ function Post() {
         </div>
       </div>
 
-      <div className={clsx('h-post', 'cursor-pointer')}>
-        <NextImage src={thumb.src} alt='Post' />
-      </div>
+      <p
+        className={clsx(
+          'px-4 pt-2 pb-3',
+          'text-light-text dark:text-dark-text'
+        )}>
+        {post.content}
+      </p>
+
+      {post.attachment && (
+        <div className={clsx('h-post', 'cursor-pointer')}>
+          <NextImage src={post.attachment} alt='Post' />
+        </div>
+      )}
 
       <div className={clsx('px-4 py-2')}>
         <div className={clsx('flex items-center justify-between mt-0.5')}>

@@ -1,11 +1,14 @@
 // models
 const Post = require('../models/postModel');
+const User = require('../models/userModel');
 
 const postsController = {};
 
-postsController.handleGetPosts = async (req, res) => {
+postsController.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate('user', ['username']);
+    const posts = await Post.find()
+      .sort({ createdAt: 'desc' })
+      .populate('user', ['username', 'avatar']);
 
     res.json({ success: true, posts });
   } catch (error) {
@@ -14,8 +17,8 @@ postsController.handleGetPosts = async (req, res) => {
   }
 };
 
-postsController.handleCreatePost = async (req, res) => {
-  const { content, likeCount, attachments } = req.body;
+postsController.createPost = async (req, res) => {
+  const { content, attachment } = req.body;
 
   if (!content) {
     return res
@@ -24,20 +27,21 @@ postsController.handleCreatePost = async (req, res) => {
   }
 
   try {
-    const newPost = new Post({
+    const user = await User.findById(req.userId).select('-password');
+
+    const post = new Post({
       content,
-      likeCount,
-      attachments,
-      user: req.userId, // ObjectId
+      attachment,
+      user,
     });
 
     // Save to db
-    await newPost.save();
+    await post.save();
 
     res.json({
       success: true,
       message: 'New post has been created successfully',
-      post: newPost,
+      post,
     });
   } catch (error) {
     console.log('error', error);
@@ -45,7 +49,7 @@ postsController.handleCreatePost = async (req, res) => {
   }
 };
 
-postsController.handleUpdatePost = async (req, res) => {
+postsController.updatePost = async (req, res) => {
   const { content, likeCount, attachments } = req.body;
 
   if (!content) {
@@ -82,7 +86,7 @@ postsController.handleUpdatePost = async (req, res) => {
   }
 };
 
-postsController.handleDeletePost = async (req, res) => {
+postsController.deletePost = async (req, res) => {
   try {
     const deleteCondition = { _id: req.params.id, user: req.userId };
     const deletedPost = await Post.findOneAndDelete(deleteCondition);

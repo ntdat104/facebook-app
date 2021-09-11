@@ -1,11 +1,11 @@
-import { authAxios } from './axiosClient';
+import { axiosClient } from './axiosClient';
 
 // types
-import { IRegisterInfo, ILoginInfo } from './types';
+import { IRegisterData, ILoginData } from './types';
 
 export const getCurrentUser = async () => {
   try {
-    const response = await authAxios.get('/auth/user');
+    const response = await axiosClient.get('/auth/user');
 
     return response;
   } catch (error: any) {
@@ -15,9 +15,9 @@ export const getCurrentUser = async () => {
   }
 };
 
-export const registerUser = async (formData: IRegisterInfo) => {
+export const registerUser = async (formData: IRegisterData) => {
   try {
-    const response = await authAxios.post('/auth/register', formData);
+    const response = await axiosClient.post('/auth/register', formData);
 
     return response.data;
   } catch (error: any) {
@@ -27,9 +27,9 @@ export const registerUser = async (formData: IRegisterInfo) => {
   }
 };
 
-export const loginUser = async (formData: ILoginInfo) => {
+export const loginUser = async (formData: ILoginData) => {
   try {
-    const response = await authAxios.post('/auth/login', formData);
+    const response = await axiosClient.post('/auth/login', formData);
 
     return response.data;
   } catch (error: any) {
@@ -41,7 +41,7 @@ export const loginUser = async (formData: ILoginInfo) => {
 
 export const getNewAccessToken = async (refreshToken: string) => {
   try {
-    const response = await authAxios.post('/auth/token', { refreshToken });
+    const response = await axiosClient.post('/auth/token', { refreshToken });
 
     return response.data;
   } catch (error: any) {
