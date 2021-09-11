@@ -1,4 +1,4 @@
-import Post from './Post';
+import PostList from './PostList';
 import Sender from './Sender';
 import Stories from './Stories';
 
@@ -7,7 +7,7 @@ function Content() {
     <div className='pt-6 mb-20 w-content-middle'>
       <Stories />
       <Sender />
-      <Post />
+      <PostList />
     </div>
   );
 }

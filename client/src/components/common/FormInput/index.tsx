@@ -35,7 +35,7 @@ function FormInput(props: IProps) {
         onChange={handleChange}
       />
       <p className={clsx('mt-1', 'text-red')}>
-        {serverError ? serverError : errors[name] && errors[name].message}
+        {serverError ? serverError : errors[name]?.message}
       </p>
     </div>
   );

@@ -16,7 +16,7 @@ function MainLayout({ children }: IProps) {
         <title>Facebook</title>
       </Head>
 
-      <div className='light i-scrollbar-show'>{children}</div>
+      <div className='dark i-scrollbar-show'>{children}</div>
     </>
   );
 }
