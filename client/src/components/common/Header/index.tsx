@@ -10,7 +10,7 @@ function Header() {
     <header
       className={clsx(
         'fixed left-0 top-0 z-50',
-        'w-3.75 md:py-0 flex items-center justify-between shadow-md',
+        'px-3.75 w-full md:py-0 flex items-center justify-between shadow-md',
         'bg-light dark:bg-dark'
       )}>
       <HeaderLeft />
