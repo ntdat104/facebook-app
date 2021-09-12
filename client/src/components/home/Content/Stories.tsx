@@ -243,7 +243,7 @@ function Stories() {
           className={clsx(
             'absolute left-0 right-0 bottom-2.5',
             'mt-7.5 px-3 i-truncate text-xs font-bold',
-            'text-light-text dark:text-dark-text'
+            'text-white dark:text-dark-text'
           )}>
           Shrimp
         </div>
