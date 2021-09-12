@@ -15,7 +15,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNhM
 
 
 ### Update post
-PUT http://localhost:5000/api/posts/6131a63f7deee780626ebfe7
+PUT http://localhost:5000/api/posts/613c3472b988a24a74147696
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxOWM0ZmFlMzk4NzExY2Y1NTE1MzciLCJpYXQiOjE2MzA2NTU4NDJ9.sOBmvlyN_PpmPMajzfNrSlmX1fi7WCAFbCK05opBHnY
 
@@ -27,5 +27,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxO
 
 
 ### Delete post
-DELETE http://localhost:5000/api/posts/6131e1e6dcbd1b38cb69d8c1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTMxZDg2OTU3N2YyZTIzYjFiMDA2M2MiLCJpYXQiOjE2MzA2NTkxMDB9.Mu43sPMFgxMlqmknwcASdTqU8lYLTAZm8PI9iooWKCk
+DELETE http://localhost:5000/api/posts/613c4931b988a24a741476f7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNhMGIzMDRhMDM2YmI0ODJhNDk5YmEiLCJpYXQiOjE2MzEzNDg1NjUsImV4cCI6MTYzMTY0ODU2NX0.yrattXbyFB37w2cb2EOy11j2Qt0ZMABd9SLajMSNhhA
+
+
+### Like post
+PATCH http://localhost:5000/api/posts/613c88a6663f087f63c02967
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNhMGIzMDRhMDM2YmI0ODJhNDk5YmEiLCJpYXQiOjE2MzEzNDg1NjUsImV4cCI6MTYzMTY0ODU2NX0.yrattXbyFB37w2cb2EOy11j2Qt0ZMABd9SLajMSNhhA
+
+{
+  "likeCount": 12422212
+}
+
