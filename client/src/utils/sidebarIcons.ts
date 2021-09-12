@@ -1,35 +1,16 @@
-import friendsIcon from '@/assets/images/Sidebar/friends.png';
-import groupsIcon from '@/assets/images/Sidebar/groups.png';
-import marketplaceIcon from '@/assets/images/Sidebar/marketplace.png';
-import pagesIcon from '@/assets/images/Sidebar/pages.png';
-import watchIcon from '@/assets/images/Sidebar/watch.png';
-import groupOne from '@/assets/images/Sidebar/group-1.jpg';
-import groupTwo from '@/assets/images/Sidebar/group-2.png';
-import groupThree from '@/assets/images/Sidebar/group-3.jpg';
-import groupFour from '@/assets/images/Sidebar/group-4.png';
-import groupFive from '@/assets/images/Sidebar/group-5.png';
-import groupSix from '@/assets/images/Sidebar/group-6.jpg';
-import groupSeven from '@/assets/images/Sidebar/group-7.jpg';
-import groupEight from '@/assets/images/Sidebar/group-8.jpg';
-import groupNine from '@/assets/images/Sidebar/group-9.jpg';
-import groupTen from '@/assets/images/Sidebar/group-10.jpg';
-import groupEleven from '@/assets/images/Sidebar/group-11.png';
-
-export {
-  friendsIcon,
-  groupsIcon,
-  marketplaceIcon,
-  pagesIcon,
-  watchIcon,
-  groupOne,
-  groupTwo,
-  groupThree,
-  groupFour,
-  groupFive,
-  groupSix,
-  groupSeven,
-  groupEight,
-  groupNine,
-  groupTen,
-  groupEleven,
-};
+export { default as friendsIcon } from '@/assets/images/Sidebar/friends.png';
+export { default as groupsIcon } from '@/assets/images/Sidebar/groups.png';
+export { default as marketplaceIcon } from '@/assets/images/Sidebar/marketplace.png';
+export { default as pagesIcon } from '@/assets/images/Sidebar/pages.png';
+export { default as watchIcon } from '@/assets/images/Sidebar/watch.png';
+export { default as groupOne } from '@/assets/images/Sidebar/group-1.jpg';
+export { default as groupTwo } from '@/assets/images/Sidebar/group-2.png';
+export { default as groupThree } from '@/assets/images/Sidebar/group-3.jpg';
+export { default as groupFour } from '@/assets/images/Sidebar/group-4.png';
+export { default as groupFive } from '@/assets/images/Sidebar/group-5.png';
+export { default as groupSix } from '@/assets/images/Sidebar/group-6.jpg';
+export { default as groupSeven } from '@/assets/images/Sidebar/group-7.jpg';
+export { default as groupEight } from '@/assets/images/Sidebar/group-8.jpg';
+export { default as groupNine } from '@/assets/images/Sidebar/group-9.jpg';
+export { default as groupTen } from '@/assets/images/Sidebar/group-10.jpg';
+export { default as groupEleven } from '@/assets/images/Sidebar/group-11.png';

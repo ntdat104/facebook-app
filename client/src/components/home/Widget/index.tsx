@@ -13,7 +13,7 @@ import styles from '@/styles/utilities.module.scss';
 
 function Widget() {
   return (
-    <div className='pt-6 overflow-y-scroll w-content-right h-widget'>
+    <div className='hidden lg:block pt-6 overflow-y-scroll w-content-right h-widget'>
       <div className={clsx('flex items-center justify-between mb-3 px-3')}>
         <span
           className={clsx(
@@ -72,7 +72,10 @@ function Widget() {
             'hover:bg-light-gray-dark dark:hover:bg-dark-gray-dark',
             'cursor-pointer'
           )}>
-          <Avatar className={styles.circleSize} />
+          <Avatar
+            className={styles.circleSize}
+            src='https://avatars.dicebear.com/api/avataaars/4TsWwy.svg'
+          />
           <span
             className={clsx(
               'ml-3 font-bold',

@@ -1,17 +1,18 @@
 import store from '../store';
 
-export interface IFormDataLogin {
+export interface IDataLogin {
   username: string;
   password: string;
 }
 
-export interface IFormDataRegister {
+export interface IDataRegister {
   username: string;
   password: string;
   avatar: string;
 }
 
 export interface IAuthInitialState {
+  userId: string;
   username: string;
   avatar: string;
   isAuthenticated: boolean;
@@ -35,7 +36,7 @@ export interface IPostsInitialState {
   posts: IPost[];
 }
 
-export interface IFormDataSender {
+export interface IDataSend {
   content: string;
   attachment?: string;
 }

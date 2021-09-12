@@ -1,12 +1,18 @@
-import { ReactNode } from 'react';
-
+import { ReactNode, useContext } from 'react';
 import Head from 'next/head';
+
+// clsx
+import clsx from 'clsx';
+
+import { ThemeContext } from '@/contexts/ThemeContext';
 
 interface IProps {
   children: ReactNode;
 }
 
 function MainLayout({ children }: IProps) {
+  const { isDark } = useContext(ThemeContext);
+
   return (
     <>
       <Head>
@@ -16,7 +22,9 @@ function MainLayout({ children }: IProps) {
         <title>Facebook</title>
       </Head>
 
-      <div className='dark i-scrollbar-show'>{children}</div>
+      <div className={clsx(isDark ? 'dark' : 'light', 'i-scrollbar-show')}>
+        {children}
+      </div>
     </>
   );
 }

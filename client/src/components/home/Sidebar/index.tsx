@@ -1,3 +1,6 @@
+import { authState$ } from '@/redux/selectors';
+import { useSelector } from 'react-redux';
+
 // clsx
 import clsx from 'clsx';
 
@@ -31,11 +34,13 @@ import {
 } from '@/utils/sidebarIcons';
 
 function Sidebar() {
+  const user = useSelector(authState$);
+
   return (
     <div
       className={clsx(
         'relative',
-        'h-sidebar ml-2 pt-5 pb-1 overflow-y-scroll',
+        'hidden lg:block h-sidebar ml-2 pt-5 pb-1 overflow-y-scroll',
         'text-light-text dark:text-dark-text'
       )}>
       <ul>
@@ -45,8 +50,12 @@ function Sidebar() {
             'hover:bg-light-gray-dark dark:hover:bg-dark-gray-dark',
             'cursor-pointer'
           )}>
-          <Avatar className={styles.circleSize} alt='Avatar' />
-          <span className={clsx('ml-3 font-bold')}>Minh Hung</span>
+          <Avatar
+            className={styles.circleSize}
+            src={user?.avatar}
+            alt='Avatar'
+          />
+          <span className={clsx('ml-3 font-bold')}>{user.username}</span>
         </li>
         <li
           className={clsx(

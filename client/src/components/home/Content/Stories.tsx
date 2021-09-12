@@ -1,17 +1,19 @@
+import { useSelector } from 'react-redux';
 import NextImage from '@/components/common/NextImage';
 
 // clsx
 import clsx from 'clsx';
 
-import avatar from '@/assets/images/Stories/avatar.jpg';
-import thumb from '@/assets/images/Stories/thumb.jpg';
-
 // material ui icons
 import AddIcon from '@material-ui/icons/Add';
 
+import { authState$ } from '@/redux/selectors';
+
 function Stories() {
+  const user = useSelector(authState$);
+
   return (
-    <ul className={clsx('grid grid-cols-6 gap-2')}>
+    <ul className={clsx('grid grid-cols-3 md:grid-cols-6 gap-2')}>
       <li
         className={clsx(
           'relative',
@@ -20,7 +22,7 @@ function Stories() {
           'cursor-pointer'
         )}>
         <div className={clsx('relative', 'h-32.5')}>
-          <NextImage src={avatar.src} alt='Avatar' />
+          {user.avatar && <NextImage src={user.avatar} alt='Avatar' />}
           <div
             className={clsx(
               'absolute bottom-0 left-0',
@@ -57,7 +59,10 @@ function Stories() {
           'cursor-pointer'
         )}>
         <div className={clsx('h-full w-full')}>
-          <NextImage src={thumb.src} alt='Thumb' />
+          <NextImage
+            src='https://avatars.dicebear.com/api/avataaars/4T1Wwy.svg'
+            alt='Thumb'
+          />
           <div
             className={clsx(
               'absolute bottom-0 left-0',
@@ -72,12 +77,19 @@ function Stories() {
             'mt-7.5 px-3 i-truncate text-xs font-bold',
             'text-white dark:text-dark-text'
           )}>
-          Minh Hung
+          Sheep
         </div>
         <div className={clsx('absolute top-2 left-2', 'i-flex-center')}>
           <div
-            className={clsx('w-10 h-10 border-3 border-primary rounded-full')}>
-            <NextImage src={avatar.src} subClass='rounded-full' alt='Avatar' />
+            className={clsx(
+              'w-10 h-10 border-3 border-primary rounded-full',
+              'bg-white'
+            )}>
+            <NextImage
+              src='https://avatars.dicebear.com/api/avataaars/4T2Wwy.svg'
+              subClass='rounded-full'
+              alt='Avatar'
+            />
           </div>
         </div>
       </li>
@@ -89,7 +101,10 @@ function Stories() {
           'cursor-pointer'
         )}>
         <div className={clsx('h-full w-full')}>
-          <NextImage src={thumb.src} alt='Thumb' />
+          <NextImage
+            src='https://avatars.dicebear.com/api/avataaars/4vsWwy.svg'
+            alt='Thumb'
+          />
           <div
             className={clsx(
               'absolute bottom-0 left-0',
@@ -104,12 +119,19 @@ function Stories() {
             'mt-7.5 px-3 i-truncate text-xs font-bold',
             'text-white dark:text-dark-text'
           )}>
-          Minh Hung
+          Erik
         </div>
         <div className={clsx('absolute top-2 left-2', 'i-flex-center')}>
           <div
-            className={clsx('w-10 h-10 border-3 border-primary rounded-full')}>
-            <NextImage src={avatar.src} subClass='rounded-full' alt='Avatar' />
+            className={clsx(
+              'w-10 h-10 border-3 border-primary rounded-full',
+              'bg-white'
+            )}>
+            <NextImage
+              src='https://avatars.dicebear.com/api/avataaars/1TsWwy.svg'
+              subClass='rounded-full'
+              alt='Avatar'
+            />
           </div>
         </div>
       </li>
@@ -117,11 +139,14 @@ function Stories() {
       <li
         className={clsx(
           'relative',
-          'rounded-lg overflow-hidden shadow-md',
+          'hidden md:block rounded-lg overflow-hidden shadow-md',
           'cursor-pointer'
         )}>
         <div className={clsx('h-full w-full')}>
-          <NextImage src={thumb.src} alt='Thumb' />
+          <NextImage
+            src='https://avatars.dicebear.com/api/avataaars/3TsWwy.svg'
+            alt='Thumb'
+          />
           <div
             className={clsx(
               'absolute bottom-0 left-0',
@@ -136,12 +161,19 @@ function Stories() {
             'mt-7.5 px-3 i-truncate text-xs font-bold',
             'text-white dark:text-dark-text'
           )}>
-          Minh Hung
+          Elephant
         </div>
         <div className={clsx('absolute top-2 left-2', 'i-flex-center')}>
           <div
-            className={clsx('w-10 h-10 border-3 border-primary rounded-full')}>
-            <NextImage src={avatar.src} subClass='rounded-full' alt='Avatar' />
+            className={clsx(
+              'w-10 h-10 border-3 border-primary rounded-full',
+              'bg-white'
+            )}>
+            <NextImage
+              src='https://avatars.dicebear.com/api/avataaars/42sWwy.svg'
+              subClass='rounded-full'
+              alt='Avatar'
+            />
           </div>
         </div>
       </li>
@@ -149,11 +181,14 @@ function Stories() {
       <li
         className={clsx(
           'relative',
-          'rounded-lg overflow-hidden shadow-md',
+          'hidden md:block rounded-lg overflow-hidden shadow-md',
           'cursor-pointer'
         )}>
         <div className={clsx('h-full w-full')}>
-          <NextImage src={thumb.src} alt='Thumb' />
+          <NextImage
+            src='https://avatars.dicebear.com/api/avataaars/41sWwy.svg'
+            alt='Thumb'
+          />
           <div
             className={clsx(
               'absolute bottom-0 left-0',
@@ -168,12 +203,19 @@ function Stories() {
             'mt-7.5 px-3 i-truncate text-xs font-bold',
             'text-white dark:text-dark-text'
           )}>
-          Minh Hung
+          Alaska
         </div>
         <div className={clsx('absolute top-2 left-2', 'i-flex-center')}>
           <div
-            className={clsx('w-10 h-10 border-3 border-primary rounded-full')}>
-            <NextImage src={avatar.src} subClass='rounded-full' alt='Avatar' />
+            className={clsx(
+              'w-10 h-10 border-3 border-primary rounded-full',
+              'bg-white'
+            )}>
+            <NextImage
+              src='https://avatars.dicebear.com/api/avataaars/4T55wy.svg'
+              subClass='rounded-full'
+              alt='Avatar'
+            />
           </div>
         </div>
       </li>
@@ -181,11 +223,14 @@ function Stories() {
       <li
         className={clsx(
           'relative',
-          'rounded-lg overflow-hidden shadow-md',
+          'hidden md:block rounded-lg overflow-hidden shadow-md',
           'cursor-pointer'
         )}>
         <div className={clsx('h-full w-full')}>
-          <NextImage src={thumb.src} alt='Thumb' />
+          <NextImage
+            src='https://avatars.dicebear.com/api/avataaars/4T8Wwy.svg'
+            alt='Thumb'
+          />
           <div
             className={clsx(
               'absolute bottom-0 left-0',
@@ -200,12 +245,19 @@ function Stories() {
             'mt-7.5 px-3 i-truncate text-xs font-bold',
             'text-light-text dark:text-dark-text'
           )}>
-          Minh Hung
+          Shrimp
         </div>
         <div className={clsx('absolute top-2 left-2', 'i-flex-center')}>
           <div
-            className={clsx('w-10 h-10 border-3 border-primary rounded-full')}>
-            <NextImage src={avatar.src} subClass='rounded-full' alt='Avatar' />
+            className={clsx(
+              'w-10 h-10 border-3 border-primary rounded-full',
+              'bg-white'
+            )}>
+            <NextImage
+              src='https://avatars.dicebear.com/api/avataaars/7TsWwy.svg'
+              subClass='rounded-full'
+              alt='Avatar'
+            />
           </div>
         </div>
       </li>

@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // types
-import { IRegisterFormInputs } from './types';
+import { IRegisterInputs } from './types';
 
 import { randomAvatar } from '@/apis/avatarApi';
 import { registerSchema } from '@/utils/formSchemas';
@@ -34,11 +34,11 @@ function RegisterForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<IRegisterFormInputs>({
+  } = useForm<IRegisterInputs>({
     resolver: yupResolver(registerSchema),
   });
 
-  const onHandleSubmit = async (data: IRegisterFormInputs) => {
+  const onHandleSubmit = async (data: IRegisterInputs) => {
     const { username, password } = data;
 
     try {

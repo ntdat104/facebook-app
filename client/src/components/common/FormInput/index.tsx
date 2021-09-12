@@ -7,13 +7,13 @@ import clsx from 'clsx';
 import { UseFormRegister } from 'react-hook-form';
 
 // types
-import { ILoginFormInputs } from '@/components/login/LoginForm/types';
-import { IRegisterFormInputs } from '@/components/register/RegisterForm/types';
+import { ILoginInputs } from '@/components/login/LoginForm/types';
+import { IRegisterInputs } from '@/components/register/RegisterForm/types';
 
 export interface IProps {
   placeholder: string;
-  name: keyof ILoginFormInputs | keyof IRegisterFormInputs;
-  register: UseFormRegister<ILoginFormInputs | IRegisterFormInputs>;
+  name: keyof ILoginInputs | keyof IRegisterInputs;
+  register: UseFormRegister<ILoginInputs | IRegisterInputs>;
   errors: any;
   serverError?: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;

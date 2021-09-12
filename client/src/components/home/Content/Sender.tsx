@@ -1,4 +1,5 @@
 import { FormEvent, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // clsx
 import clsx from 'clsx';
@@ -16,6 +17,7 @@ import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfie
 
 import { createPost } from '@/redux/slices/postsSlice';
 import useMyDispatch from '@/hooks/useMyDispatch';
+import { authState$ } from '@/redux/selectors';
 
 interface ISenderFormInputs {
   content: string;
@@ -34,9 +36,12 @@ function Sender() {
   const inputWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useMyDispatch();
+  const user = useSelector(authState$);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!formValues.content.trim()) return;
 
     const response = await dispatch(createPost(formValues)).unwrap();
 
@@ -62,7 +67,7 @@ function Sender() {
         'bg-light dark:bg-dark'
       )}>
       <div className={clsx('flex items-center')}>
-        <Avatar className='cursor-pointer' />
+        <Avatar className='cursor-pointer' src={user.avatar} />
         <input
           value={formValues.content}
           onChange={(e) => {
@@ -75,7 +80,7 @@ function Sender() {
             'flex-1 rounded-full px-4 py-2.5 ml-2 outline-none',
             'bg-light-gray dark:bg-dark-gray text-light-text dark:text-dark-text'
           )}
-          placeholder="What's on your mind, Hung?"
+          placeholder={`What's on your mind, ${user.username}?`}
         />
       </div>
 
@@ -88,13 +93,13 @@ function Sender() {
       <ul className={clsx('flex justify-between')}>
         <li
           className={clsx(
-            'i-flex-center w-full rounded-lg text-center py-1.5',
-            'hover:bg-light-gray dark:hover:bg-dark-gray',
+            'hidden md:i-flex-center w-full rounded-lg text-center py-2',
+            'lg:hover:bg-light-gray lg:dark:hover:bg-dark-gray',
             'cursor-pointer'
           )}>
           <VideoCallIcon
             fontSize='large'
-            className={clsx('fill-current text-red')}
+            className={clsx('!text-2xl', 'fill-current text-red')}
           />
           <span
             className={clsx(
@@ -122,17 +127,16 @@ function Sender() {
         <li
           onClick={handleUploadAttach}
           className={clsx(
-            'i-flex-center w-full rounded-lg text-center py-1.5',
-            'hover:bg-light-gray dark:hover:bg-dark-gray',
+            'i-flex-center w-full rounded-lg text-center py-2',
+            'lg:hover:bg-light-gray lg:dark:hover:bg-dark-gray',
             'cursor-pointer'
           )}>
           <PhotoLibraryIcon
-            fontSize='large'
-            className={clsx('fill-current text-green')}
+            className={clsx('!text-xl lg:!text-2xl', 'fill-current text-green')}
           />
           <span
             className={clsx(
-              'ml-1.5 font-bold',
+              'ml-1.5 font-bold text-xs md:text-sm',
               'text-light-gray-darkest dark:text-dark-gray-darkest'
             )}>
             Photo/Video
@@ -141,13 +145,13 @@ function Sender() {
 
         <li
           className={clsx(
-            'i-flex-center w-full rounded-lg text-center py-1.5',
-            'hover:bg-light-gray dark:hover:bg-dark-gray',
+            'hidden md:i-flex-center w-full rounded-lg text-center py-2',
+            'lg:hover:bg-light-gray lg:dark:hover:bg-dark-gray',
             'cursor-pointer'
           )}>
           <SentimentVerySatisfiedIcon
             fontSize='large'
-            className={clsx('fill-current text-yellow')}
+            className={clsx('!text-2xl', 'fill-current text-yellow')}
           />
           <span
             className={clsx(

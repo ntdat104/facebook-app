@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 // clsx
 import clsx from 'clsx';
 
@@ -12,8 +14,16 @@ import Widget from '@/components/home/Widget';
 
 import styles from '@/styles/utilities.module.scss';
 import withPrivateRoute from '@/hocs/withPrivateRoute';
+import useMyDispatch from '@/hooks/useMyDispatch';
+import { fetchCurrentUser } from '@/redux/slices/authSlice';
 
 const Home: NextPage = () => {
+  const dispatch = useMyDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <MainLayout>
       <Header />
@@ -21,7 +31,7 @@ const Home: NextPage = () => {
       <div
         className={clsx(
           'absolute top-header',
-          'flex items-start justify-between w-full',
+          'lg:flex px-2 lg:px-0 items-start justify-between w-full',
           'bg-light-body dark:bg-dark-body'
         )}>
         <div

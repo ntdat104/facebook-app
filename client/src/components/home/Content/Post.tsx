@@ -1,4 +1,4 @@
-import NextImage from '@/components/common/NextImage';
+import { useSelector } from 'react-redux';
 
 // clsx
 import clsx from 'clsx';
@@ -11,18 +11,46 @@ import GroupIcon from '@material-ui/icons/Group';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
 // types
 import { IPost } from '@/redux/types';
+
+import { convertTime } from '@/utils/convertTime';
+import useMyDispatch from '@/hooks/useMyDispatch';
+import { deletePost, likePost } from '@/redux/slices/postsSlice';
+import { postsState$ } from '@/redux/selectors';
+
+import NextImage from '@/components/common/NextImage';
 
 import like from '@/assets/svgs/Post/like.svg';
 import sad from '@/assets/svgs/Post/sad.svg';
 import haha from '@/assets/svgs/Post/haha.svg';
 
-function Post(post: IPost) {
+interface IProps {
+  canDelete: boolean;
+  post: IPost;
+}
+
+function Post({ canDelete, post }: IProps) {
+  const dispatch = useMyDispatch();
+  const posts = useSelector(postsState$).posts;
+
+  const handleDeletePost = (id: string) => {
+    dispatch(deletePost(id));
+  };
+
+  const handleLikePost = (id: string) => {
+    const selectedPost = posts.find((post) => post._id === id);
+
+    const likeCount = selectedPost && selectedPost.likeCount + 1;
+
+    dispatch(likePost({ id, likeCount: likeCount as number }));
+  };
+
   return (
     <div className={clsx('mt-6', 'bg-light dark:bg-dark rounded-lg shadow-md')}>
-      <div className={clsx('flex items-center px-4 py-3')}>
+      <div className={clsx('relative', 'flex items-center px-4 py-3')}>
         <Avatar className='cursor-pointer' src={post.user.avatar} />
         <div className={clsx('ml-2')}>
           <div
@@ -42,7 +70,7 @@ function Post(post: IPost) {
                 'hover:underline',
                 'cursor-pointer'
               )}>
-              {post.createdAt}
+              {convertTime(post.createdAt)}
             </span>
             <GroupIcon
               className={clsx(
@@ -52,6 +80,18 @@ function Post(post: IPost) {
             />
           </div>
         </div>
+
+        {canDelete && (
+          <DeleteOutlineOutlinedIcon
+            onClick={() => handleDeletePost(post._id)}
+            className={clsx(
+              'absolute right-1 top-1',
+              '!text-xl !w-10 !h-10 p-2.5',
+              'fill-primary text-gray-icon',
+              'cursor-pointer'
+            )}
+          />
+        )}
       </div>
 
       <p
@@ -69,63 +109,50 @@ function Post(post: IPost) {
       )}
 
       <div className={clsx('px-4 py-2')}>
-        <div className={clsx('flex items-center justify-between mt-0.5')}>
-          <div className={clsx('flex items-start')}>
-            <div className={clsx('flex items-center')}>
-              <div
+        {post.likeCount > 0 && (
+          <div className={clsx('flex items-center justify-between mt-0.5')}>
+            <div className={clsx('flex items-start')}>
+              <div className={clsx('flex items-center')}>
+                <div
+                  className={clsx(
+                    'z-2',
+                    'w-4.5 shadow-emoji-light dark:shadow-emoji-dark rounded-full',
+                    'cursor-pointer'
+                  )}>
+                  <NextImage src={like.src} alt='Emoji'></NextImage>
+                </div>
+              </div>
+              <span
                 className={clsx(
-                  'z-2',
-                  'w-4.5 shadow-emoji-light dark:shadow-emoji-dark rounded-full',
+                  'ml-2',
+                  'text-dark-gray-darkest dark:text-dark-gray-darkest',
+                  'hover:underline',
                   'cursor-pointer'
                 )}>
-                <NextImage src={like.src} alt='Emoji'></NextImage>
-              </div>
-              <div
-                className={clsx(
-                  'z-1',
-                  'shadow-emoji-light dark:shadow-emoji-dark rounded-full w-4.5',
-                  'cursor-pointer'
-                )}>
-                <NextImage src={haha.src} alt='Emoji'></NextImage>
-              </div>
-              <div
-                className={clsx(
-                  'shadow-emoji-light dark:shadow-emoji-dark rounded-full w-4.5',
-                  'cursor-pointer'
-                )}>
-                <NextImage src={sad.src} alt='Emoji'></NextImage>
-              </div>
+                {post.likeCount}
+              </span>
             </div>
-            <span
-              className={clsx(
-                'ml-2',
-                'text-dark-gray-darkest dark:text-dark-gray-darkest',
-                'hover:underline',
-                'cursor-pointer'
-              )}>
-              2.6k
-            </span>
+            <div className={clsx('flex items-center')}>
+              <span
+                className={clsx(
+                  'hidden text-light-gray-darkest dark:text-dark-gray-darkest',
+                  'hover:underline',
+                  'cursor-pointer'
+                )}>
+                0 Comments
+              </span>
+              <span
+                className={clsx(
+                  'ml-2',
+                  'hidden text-light-gray-darkest dark:text-dark-gray-darkest',
+                  'hover:underline',
+                  'cursor-pointer'
+                )}>
+                0 Shares
+              </span>
+            </div>
           </div>
-          <div className={clsx('flex items-center')}>
-            <span
-              className={clsx(
-                'text-light-gray-darkest dark:text-dark-gray-darkest',
-                'hover:underline',
-                'cursor-pointer'
-              )}>
-              538 Comments
-            </span>
-            <span
-              className={clsx(
-                'ml-2',
-                'text-light-gray-darkest dark:text-dark-gray-darkest',
-                'hover:underline',
-                'cursor-pointer'
-              )}>
-              83 Shares
-            </span>
-          </div>
-        </div>
+        )}
 
         <div
           className={clsx(
@@ -136,6 +163,7 @@ function Post(post: IPost) {
 
         <ul className={clsx('flex justify-between')}>
           <li
+            onClick={() => handleLikePost(post._id)}
             className={clsx(
               'py-2 text-center w-full rounded-lg',
               'hover:bg-light-gray dark:hover:bg-dark-gray',
@@ -143,13 +171,15 @@ function Post(post: IPost) {
             )}>
             <ThumbUpAltOutlinedIcon
               className={clsx(
+                '!text-base md:!text-xl',
                 'fill-current text-light-gray-darkest dark:text-dark-gray-darkest'
               )}
             />
             <span
               className={clsx(
-                'ml-1.5 font-bold',
-                'text-light-gray-darkest dark:text-dark-gray-darkest'
+                'ml-1.5 font-bold text-xs md:text-sm',
+                'text-light-gray-darkest dark:text-dark-gray-darkest',
+                'select-none'
               )}>
               Like
             </span>
@@ -162,13 +192,15 @@ function Post(post: IPost) {
             )}>
             <ChatBubbleOutlineOutlinedIcon
               className={clsx(
+                '!text-base md:!text-xl',
                 'fill-current text-light-gray-darkest dark:text-dark-gray-darkest'
               )}
             />
             <span
               className={clsx(
-                'ml-1.5 font-bold',
-                'text-light-gray-darkest dark:text-dark-gray-darkest'
+                'ml-1.5 font-bold text-xs md:text-sm',
+                'text-light-gray-darkest dark:text-dark-gray-darkest',
+                'select-none'
               )}>
               Comment
             </span>
@@ -181,13 +213,15 @@ function Post(post: IPost) {
             )}>
             <ShareOutlinedIcon
               className={clsx(
+                '!text-base md:!text-xl',
                 'fill-current text-light-gray-darkest dark:text-dark-gray-darkest'
               )}
             />
             <span
               className={clsx(
-                'ml-1.5 font-bold',
-                'text-light-gray-darkest dark:text-dark-gray-darkest'
+                'ml-1.5 font-bold text-xs md:text-sm',
+                'text-light-gray-darkest dark:text-dark-gray-darkest',
+                'select-none'
               )}>
               Share
             </span>

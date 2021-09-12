@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // types
-import { ILoginFormInputs } from './types';
+import { ILoginInputs } from './types';
 
 import { loginSchema } from '@/utils/formSchemas';
 import useMyDispatch from '@/hooks/useMyDispatch';
@@ -28,11 +28,11 @@ function LoginForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ILoginFormInputs>({
+  } = useForm<ILoginInputs>({
     resolver: yupResolver(loginSchema),
   });
 
-  const onHandleSubmit = async (data: ILoginFormInputs) => {
+  const onHandleSubmit = async (data: ILoginInputs) => {
     const { username, password } = data;
 
     try {

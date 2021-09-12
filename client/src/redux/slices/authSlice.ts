@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // types
-import { IAuthInitialState, IFormDataLogin, IFormDataRegister } from '../types';
+import { IAuthInitialState, IDataLogin, IDataRegister } from '../types';
 
 import * as authApi from '@/apis/authApi';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@/constants';
 
 const initialState: IAuthInitialState = {
+  userId: '',
   username: '',
   avatar: '',
   isAuthenticated: false,
@@ -26,7 +27,7 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const fetchUserRegister = createAsyncThunk(
   'auth/fetchUserRegister',
-  async (formData: IFormDataRegister) => {
+  async (formData: IDataRegister) => {
     const response = await authApi.registerUser(formData);
 
     return response;
@@ -35,7 +36,7 @@ export const fetchUserRegister = createAsyncThunk(
 
 export const fetchUserLogin = createAsyncThunk(
   'auth/fetchUserLogin',
-  async (formData: IFormDataLogin) => {
+  async (formData: IDataLogin) => {
     const response = await authApi.loginUser(formData);
 
     return response;
@@ -55,6 +56,7 @@ const authSlice = createSlice({
 
         return {
           ...state,
+          userId: user._id,
           username: user.username,
           avatar: user.avatar,
           isAuthenticated: true,

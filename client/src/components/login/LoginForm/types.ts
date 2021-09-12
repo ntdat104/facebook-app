@@ -1,4 +1,4 @@
-export interface ILoginFormInputs {
+export interface ILoginInputs {
   username: string;
   password: string;
 }
